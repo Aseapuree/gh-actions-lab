@@ -9,14 +9,14 @@ jobs:
     build:
       runs-on: ubuntu-latest
 
-    steps:
-      - name: Crear archivo de salida
-        run: |
-          echo "Generado el $(date)" > build.txt
-          cat build.txt
+      steps:
+          - name: Crear archivo de salida
+            run: |
+                echo "Generado el $(date)" > build.txt
+                cat build.txt
 
-      - name: Guardar archivo
-        uses: actions/upload-artifact@v4
-        with:
-          name: reporte-build
-          path: build.txt 
+          - name: Guardar archivo
+            uses: actions/upload-artifact@v4
+            with:
+              name: reporte-build
+              path: build.txt 
