@@ -1,0 +1,32 @@
+name: Lab 1 - challengue 01
+
+on:
+  push:
+    branches: 
+      - master
+    
+jobs:
+  job-sequential:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo name step
+        run: |
+         echo "Job step: ${{ github.action }}" > /tmp/tmp.txt
+
+      - name: Echo job
+        run: |
+         echo "Job : ${{ github.job }}"
+  job-parallel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo name step
+        run: |
+          echo "Job step: ${{ github.action }}"
+
+  job-final:
+    needs: [job-sequential,job-parallel]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          cat /tmp/tmp.txt
+
