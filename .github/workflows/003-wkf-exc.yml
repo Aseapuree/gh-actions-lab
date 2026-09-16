@@ -1,11 +1,23 @@
 name: Lab 1 - challengue 01
 
 on:
+  workflow_dispatch:
+    inputs:
+      mensaje:
+        description: "Mensaje a mostrar"
+        type: string
+        required: true
   push:
     branches: 
       - master
     
 jobs:
+  job-read-input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Echo input"
+        run: |
+          echo "Input recibido: ${{ inputs.mensaje }}"
   job-sequential:
     runs-on: ubuntu-latest
     steps:
