@@ -1,0 +1,38 @@
+name: WKF_Pull_Request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Pull Request Title 
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "PR : $PR_TITLE"
+          echo "Repository: ${{ github.repository }}"
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Pull Request Base Branch
+        env:
+          PR_BASE_REF: ${{ github.event.pull_request.base.ref}}
+        run: |
+          echo "Base branch: $PR_BASE_REF"
+          echo "Action: ${{ github.event.action }}"
+  final:
+    needs: [lint,test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Pull Request Author Branch
+        env:
+          PR_HEAD_REF: ${{ github.head_ref}}
+        run: |
+          echo "Author Branch: $PR_HEAD_REF"
+          echo "SHA: ${{ github.sha }}"
+
+
