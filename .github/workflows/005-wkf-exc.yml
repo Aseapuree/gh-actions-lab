@@ -3,7 +3,7 @@ name: 005-exc-scheduled
 on:
   workflow_dispatch:
   schedule:
-    - cron: "44 02 * * *"
+    - cron: "00 11 * * *"
 jobs:
   job1:
     runs-on: ubuntu-latest
